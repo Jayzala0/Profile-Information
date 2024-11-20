@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Marry Me, Anjali?</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #FAFAFA;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 480px;
+            margin: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            color: #222;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 1.4rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        button {
+            font-size: 1.4rem;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Button Styling */
+        #yes-btn {
+            background-color: #3897F0; /* Instagram Blue */
+        }
+
+        #no-btn {
+            background-color: #D7D7D7; /* Light Gray */
+        }
+
+        #yes-btn:hover {
+            background-color: #3481C6;
+            transform: scale(1.05);
+        }
+
+        #no-btn:hover {
+            background-color: #B1B1B1;
+            transform: scale(1.05);
+        }
+
+        #get-to-know-btn {
+            background: #F0F0F0;
+            color: #222;
+            border-radius: 25px;
+            padding: 15px 40px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            border: 1px solid #DDD;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #get-to-know-btn:hover {
+            background-color: #E1E1E1;
+        }
+
+        .heart-background {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #3897F0;
+            font-size: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .heart-background p {
+            margin: 10px;
+            font-size: 2rem;
+        }
+
+        .answer-summary {
+            font-size: 1.4rem;
+            color: #333;
+            padding: 20px;
+            background: #F8F8F8;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .answer-summary p {
+            margin: 10px 0;
+        }
+
+        .call-btn {
+            display: none;
+            margin-top: 30px;
+            padding: 15px 30px;
+            background-color: #3897F0;
+            color: white;
+            border-radius: 50px;
+            font-size: 1.6rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .call-btn:hover {
+            background-color: #3481C6;
+            transform: scale(1.1);
+        }
+
+        /* Mobile-first Responsiveness */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1.2rem;
+            }
+
+            button {
+                font-size: 1.3rem;
+                padding: 12px 30px;
+            }
+
+            #get-to-know-btn {
+                font-size: 1.4rem;
+                padding: 12px 30px;
+            }
+
+            .container {
+                padding: 15px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Welcome Page -->
+    <div class="container" id="welcome-container">
+        <h1>Welcome to My Life, Anjali! 🎉</h1>
+        <p>I'm so glad you're here! Let’s get to know each other more. 💕</p>
+        <button id="get-to-know-btn">Get to know more about me!</button>
+    </div>
+
+    <!-- Questions Page -->
+    <div class="container" id="questions-container" style="display:none;">
+        <h1>Let's Get to Know Each Other Better! 💬</h1>
+        <div class="questions" id="question-area"></div>
+    </div>
+
+    <!-- Proposal Page -->
+    <div class="container" id="marriage-proposal" style="display:none;">
+        <h1>Will You Marry Me, Anjali? 💍</h1>
+        <div class="buttons">
+            <button id="yes-btn">Yes 💖</button>
+            <button id="no-btn">No 😢</button>
+        </div>
+    </div>
+
+    <!-- Heart and Call Page -->
+    <div class="heart-background" id="heart-bg">
+        <p>I Love You, Anjali ❤️</p>
+        <p>You are my forever! 💖</p>
+        <p>Together we are unstoppable! 😍</p>
+    </div>
+
+    <!-- Answer Summary -->
+    <div class="container" id="answer-summary" style="display:none;">
+        <h1>Your Answers 💬</h1>
+        <div class="answer-summary" id="answers-list"></div>
+        <!-- Call Jay Button -->
+        <button class="call-btn" id="call-jay-btn" onclick="makeCall()">Call Jay 📞</button>
+    </div>
+
+    <script>
+        const getToKnowBtn = document.getElementById('get-to-know-btn');
+        const welcomeContainer = document.getElementById('welcome-container');
+        const questionsContainer = document.getElementById('questions-container');
+        const marriageProposal = document.getElementById('marriage-proposal');
+        const yesButton = document.getElementById('yes-btn');
+        const noButton = document.getElementById('no-btn');
+        const heartBg = document.getElementById('heart-bg');
+        const questionArea = document.getElementById('question-area');
+        const answersList = document.getElementById('answers-list');
+        const answerSummary = document.getElementById('answer-summary');
+        const callJayBtn = document.getElementById('call-jay-btn');
+
+        // Updated marriage-related questions
+        const questions = [
+            "Do you believe in soulmates? 💕",
+            "Do you think we will be happy together forever? 💍",
+            "Would you love to spend your life with me? 💖",
+            "Do you think we're ready to build a future together? 🏡",
+            "Would you marry me, Anjali? 💍"
+        ];
+
+        let currentQuestionIndex = 0;
+        let answers = [];
+
+        // Show Welcome page initially
+        welcomeContainer.style.display = 'block';
+        questionsContainer.style.display = 'none';
+        marriageProposal.style.display = 'none';
+        heartBg.style.display = 'none';
+
+        // Start getting to know more on button click
+        getToKnowBtn.addEventListener('click', () => {
+            welcomeContainer.style.display = 'none';
+            questionsContainer.style.display = 'block';
+            showNextQuestion();
+        });
+
+        // Display next question
+        function showNextQuestion() {
+            if (currentQuestionIndex < questions.length) {
+                questionArea.innerHTML = `
+                    <p><strong>${questions[currentQuestionIndex]}</strong></p>
+                    <div class="buttons">
+                        <button id="yes-btn">Yes 💖</button>
+                        <button id="no-btn">No 😢</button>
+                    </div>
+                `;
+                attachQuestionEvents();
+            } else {
+                showMarriageProposal();
+            }
+        }
+
+        // Attach events for Yes and No buttons
+        function attachQuestionEvents() {
+            const yesBtn = document.getElementById('yes-btn');
+            const noBtn = document.getElementById('no-btn');
+
+            yesBtn.addEventListener('click', () => {
+                answers.push({ question: questions[currentQuestionIndex], answer: 'Yes' });
+                currentQuestionIndex++;
+                showNextQuestion();
+            });
+
+            noBtn.addEventListener('click', () => {
+                answers.push({ question: questions[currentQuestionIndex], answer: 'No' });
+                currentQuestionIndex++;
+                showNextQuestion();
+            });
+        }
+
+        // Show marriage proposal
+        function showMarriageProposal() {
+            questionsContainer.style.display = 'none';
+            marriageProposal.style.display = 'block';
+        }
+
+        // Handle proposal buttons
+        yesButton.addEventListener('click', () => {
+            marriageProposal.style.display = 'none';
+            heartBg.style.display = 'flex';
+
+            setTimeout(() => {
+                heartBg.style.display = 'none';
+                showAnswerSummary();
+                setTimeout(() => {
+                    callJayBtn.style.display = 'block';
+                    captureScreenshot(); // Capture screenshot here
+                }, 3000); // Call button appears after 5 seconds
+            }, 3000); // Heart message disappears after 5 seconds
+        });
+
+        // Show answer summary
+        function showAnswerSummary() {
+            let answerContent = '';
+            answers.forEach((ans) => {
+                answerContent += `<p><strong>${ans.question}</strong>: ${ans.answer}</p>`;
+            });
+            answersList.innerHTML = answerContent;
+            answerSummary.style.display = 'block';
+        }
+
+        // Capture screenshot using html2canvas
+        function captureScreenshot() {
+            html2canvas(document.getElementById('answer-summary')).then((canvas) => {
+                const imgData = canvas.toDataURL("image/png");
+                // You can now upload this image or save it as needed
+                console.log("Screenshot captured");
+            });
+        }
+
+        // Initiate the call to Jay
+        function makeCall() {
+            let phoneNumber = '9558726471'; // Jay's phone number
+            window.location.href = `tel:${phoneNumber}`; // Initiate call
+        }
+    </script>
+</body>
+</html>
