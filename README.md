@@ -102,7 +102,7 @@ This section auto-updates to show your most used programming languages on GitHub
 ## 📌 Featured Projects
 
 <p>
-  <a href="https://github.com/Jayzala0/selenium-java-framework"><img src="https://img.shields.io/badge/Sample%20Selenium%20Java%20Framework-blue?style=flat-square&logo=github" /></a>
+  <a href/></a>
   <!-- Add more featured projects here -->
 </p>
 
@@ -112,7 +112,6 @@ This section auto-updates to show your most used programming languages on GitHub
 
 - I love tackling complex bugs and improving automation efficiency!
 - Currently exploring advanced Selenium Grid for scalable test automation.
-- Enjoy cricket and listening to tech podcasts in my free time.
 
 ---
 
