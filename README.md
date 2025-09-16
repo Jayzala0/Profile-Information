@@ -13,7 +13,7 @@
 
 ## 👨‍💻 About Me
 
-I'm **Jay Zala**, a passionate **Senior QA Engineer** with 4.5+ years of experience in both manual and automation testing for web and mobile applications. I thrive in collaborative settings, enjoy solving complex problems, and am driven by a commitment to quality and process improvement. Currently exploring advanced Selenium Grid concepts for QA automation.
+I'm **Jay Zala**, a passionate **Senior QA Engineer** with 5.5+ years of experience in both manual and automation testing for web and mobile applications. I thrive in collaborative settings, enjoy solving complex problems, and am driven by a commitment to quality and process improvement. Currently exploring advanced Selenium Grid concepts for QA automation.
 
 ---
 
